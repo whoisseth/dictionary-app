@@ -38,17 +38,32 @@ export default function Home() {
     refetch();
   }
 
-  const msg = new SpeechSynthesisUtterance();
-  const speechHandler = (msg: SpeechSynthesisUtterance) => {
-    msg.text = data?.word ?? "";
-    window.speechSynthesis.speak(msg);
-  };
+  // const msg = new SpeechSynthesisUtterance();
+  // const speechHandler = (msg: any) => {
+  //   msg.text = data?.word ?? "";
+  //   window.speechSynthesis.speak(msg);
+  // };
+
+  // const speechHandler = (msg: any) => {
+  //   if ('speechSynthesis' in window) {
+  //     // const msg = new SpeechSynthesisUtterance();
+  //     msg.text = data?.word ?? "";
+  //     window.speechSynthesis.speak(msg);
+  //   } else {
+  //     console.error('Speech synthesis not supported in this browser.');
+  //   }
+  // };
 
   console.log("data-", data);
 
   console.log("error", error);
 
-  if (isLoading) return "Loading...";
+  if (isLoading)
+    return (
+      <div className="min-h-screen w-full flex items-center justify-center ">
+        <p className="animate-bounce">Loading...</p>
+      </div>
+    );
 
   if (error) return "An error has occurred: " + error.message;
 
@@ -94,7 +109,7 @@ export default function Home() {
                 </h1>
                 {/* play btn */}
                 <button
-                  onClick={() => speechHandler(msg)}
+                  // onClick={() => speechHandler(msg)}
                   className=" group  h-16 w-16 rounded-full bg-purple/20 hover:bg-purple flex items-center justify-center text-4xl transition-all "
                 >
                   <IoIosPlay className="text-purple  group-hover:text-white  transition-all" />
